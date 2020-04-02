@@ -4,7 +4,7 @@ matrix:
   DOCKER_REPO:
     - quay.io
   DOCKER_USERNAME:
-    - ukhomeofficedigital+jira_software
+    - ukhomeofficedigital+dsa_image_build
 pipeline:
   docker-build:
     image: docker
