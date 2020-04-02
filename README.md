@@ -1,3 +1,3 @@
 # dsa-jira
-Jira Docker Image Build for DSA - Jira Version 8.5.3
+Jira Docker Image Build for DSA - Version 8.5.3
 
