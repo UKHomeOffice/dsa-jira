@@ -16,7 +16,8 @@ pipeline:
       event:
         - pull_request
         - push
-        - tag
+      branch:
+        - [ feature/* ]
 
   docker-push:
     image: docker
@@ -32,6 +33,7 @@ pipeline:
       - docker push ${DOCKER_REPO}/${NAME}:latest
       - docker push ${DOCKER_REPO}/${NAME}:$${DRONE_TAG}
     when:
-      event: tag
-      status: success
-      ref: refs/tags/*
+      event: 
+        - push
+      branch:
+        - master
