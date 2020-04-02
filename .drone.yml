@@ -32,7 +32,4 @@ pipeline:
       - docker push ${DOCKER_REPO}/${NAME}:latest
       - docker push ${DOCKER_REPO}/${NAME}:$${DRONE_TAG}
     when:
-      event: 
-        - tag
-      branch:
-        - master
+      event: [ tag ]
