@@ -1,6 +1,6 @@
 FROM fedora:30
 
-LABEL maintainer=""
+LABEL maintainer="dsainfra"
 
 # Why Fedora as base OS?
 # * Fedora always has latest packages compared to CentOS.
@@ -80,7 +80,7 @@ ENV JAVA_HOME /opt/atlassian/jira/jre
 # Optional values you want to pass as JAVA_OPTS. You can pass Java memory parameters to this variable,
 #    but in newer versions of Atlassian software, memory settings are done in CATALINA_OPTS.
 # JAVA_OPTS  "-Dsome.javaSetting=somevalue"
-# ENV JAVA_OPTS "-Dhttp.nonProxyHosts=dsa-jira.dsa-shs-dev.homeoffice.gov.uk"
+# ENV JAVA_OPTS "-Dhttp.nonProxyHosts=somevalue"
 
 # CATALINA settings:
 # -----------------
