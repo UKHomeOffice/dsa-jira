@@ -27,7 +27,6 @@ LABEL maintainer="dsainfra"
 ENV JIRA_VERSION=8.5.5
 
 
-
 # JIRA_DOWNLOAD_URL:
 # -----------------
 # User does not need to modify this ENV variable unless absolutely necessary.
