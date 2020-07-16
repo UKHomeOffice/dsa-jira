@@ -7,13 +7,14 @@ LABEL maintainer="dsainfra"
 # * Fedora does not need extra CentOS's EPEL repositories to install tools.
 # * Fedora runs as 'root', and has '/' as it's default WORKDIR.
 
-# This Dockerfile builds a container image for Atlassian Jira, 
+
+# This Dockerfile builds a container image for Atlassian Jira,
 # using atlassian-jira-*.bin installer. The advantage of using the bin-installer is
-#   that it includes OracleJDK. We do not have to depend on Oracle Java 
+#   that it includes OracleJDK. We do not have to depend on Oracle Java
 #   or manage it in our image.
 #
-# Since this container image contains OracleJDK, we can not (re)distribute it 
-#   as binary image, because of licensing issues. Though mentioning it in 
+# Since this container image contains OracleJDK, we can not (re)distribute it
+#   as binary image, because of licensing issues. Though mentioning it in
 #   Dockerfile is ok.
 #
 ################################### START -  Environment variables #######################################
@@ -29,12 +30,12 @@ ENV JIRA_VERSION=8.5.3
 # JIRA_DOWNLOAD_URL:
 # -----------------
 # User does not need to modify this ENV variable unless absolutely necessary.
-ENV JIRA_DOWNLOAD_URL https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-${JIRA_VERSION}-x64.bin 
+ENV JIRA_DOWNLOAD_URL https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-${JIRA_VERSION}-x64.bin
 
 
 # OS_USERNAME:
 # -----------
-#  Jira bin-installer automatically creates a 'jira' user and a 'jira' group. 
+#  Jira bin-installer automatically creates a 'jira' user and a 'jira' group.
 #  You need to specify it's name here.
 ENV OS_USERNAME jira
 
@@ -198,11 +199,11 @@ RUN echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" >/etc/sysconfig/i18
   && yum -y clean all \
   && ln -sf ${TZ_FILE} /etc/localtime \
   && echo "Downloading Jira from: ${JIRA_DOWNLOAD_URL}" && curl -# -L -O ${JIRA_DOWNLOAD_URL}  && echo \
-  && sync \ 
+  && sync \
   && chmod +x ./atlassian-jira-software-${JIRA_VERSION}-x64.bin \
   && sync \
   && ./atlassian-jira-software-${JIRA_VERSION}-x64.bin -q -varfile /tmp/jira-response.varfile \
-  && sync \ 
+  && sync \
   && rm -f                   "${JIRA_INSTALL}/lib/postgresql-9*" \
   && curl -Ls                "https://jdbc.postgresql.org/download/postgresql-42.2.1.jar" -o "${JIRA_INSTALL}/lib/postgresql-42.2.1.jar" \
   && echo "Jira version: ${JIRA_VERSION}" > ${JIRA_INSTALL}/atlassian-version.txt \
