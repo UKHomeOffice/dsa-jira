@@ -27,11 +27,11 @@ pipeline:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
       - docker login -u="$${DOCKER_USERNAME}" -p=$${DOCKER_PASSWORD} ${DOCKER_REPO}
-      - docker tag ${DOCKER_REPO}/${NAME}:$${DRONE_COMMIT_SHA} ${DOCKER_REPO}/${NAME}:latest
+      - docker tag ${DOCKER_REPO}/${NAME}:$${DRONE_COMMIT_SHA} ${DOCKER_REPO}/${NAME}:dev-latest
       - docker push ${DOCKER_REPO}/${NAME}:$${DRONE_COMMIT_SHA}
-      - docker push ${DOCKER_REPO}/${NAME}:latest
+      - docker push ${DOCKER_REPO}/${NAME}:dev-latest
     when:
       event: 
         - push
       branch:
-        - master
+        - development
