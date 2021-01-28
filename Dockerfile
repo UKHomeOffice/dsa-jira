@@ -127,6 +127,13 @@ ENV DATACENTER_MODE=false
 # ENV JIRA_DATACENTER_SHARE /var/atlassian/jira-datacenter
 ENV JIRA_DATACENTER_SHARE="/mnt/shared"
 
+# JIRA_BACKUP_PATH
+# ---------------------
+# This is the path to the backups within the jira container. 
+# This variable is used for a cronjob that will remove backups older than 30 days, which runs every Friday afternoon.
+ENV JIRA_BACKUP_PATH=/var/atlassian/application-data/jira/export/20*.zip
+
+
 
 # Reverse proxy specific variables:
 # ================================
