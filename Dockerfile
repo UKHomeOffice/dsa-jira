@@ -244,7 +244,7 @@ COPY docker-entrypoint.sh /
 # Cronjob to remove backups older than 30 days, which is run at 1pm every Friday
 RUN echo "0 13 * * 5 jira find $JIRA_BACKUP_PATH -mtime +30 -exec rm {} \;" > /etc/cron.d/crontab
 
-RUN echo '* * * * * jira echo Time and Date is $(date) >> /home/time_and_date_test.txt' >> /etc/cron.d/crontab
+RUN echo '* * * * * jira echo Time and Date is $(date) >> /home/jira/time_and_date_test.txt' >> /etc/cron.d/crontab
 
 # Change of permissions to allow cron to run the job, and then initialisation of the job.
 RUN chmod 0644 /etc/cron.d/crontab 
