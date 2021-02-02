@@ -1,6 +1,4 @@
 #!/bin/bash
-# Start cron service for backup removal.
-crond
 
 # Check if the JIRA_HOME and JIRA_INSTALL variable are found in ENV.
 if [ -z "${JIRA_HOME}" ] || [ -z "${JIRA_INSTALL}" ]; then

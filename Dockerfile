@@ -127,12 +127,6 @@ ENV DATACENTER_MODE=false
 # ENV JIRA_DATACENTER_SHARE /var/atlassian/jira-datacenter
 ENV JIRA_DATACENTER_SHARE="/mnt/shared"
 
-# JIRA_BACKUP_PATH
-# ---------------------
-# This is the path to the backups within the jira container. 
-# This variable is used for a cronjob that will remove backups older than 30 days, which runs every Friday afternoon.
-ENV JIRA_BACKUP_PATH=/var/atlassian/application-data/jira/export/20*.zip
-
 
 
 # Reverse proxy specific variables:
@@ -230,26 +224,13 @@ RUN echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" >/etc/sysconfig/i18
   && sync \
   && if [ -n "${SSL_CERTS_PATH}" ] && [ ! -d "${SSL_CERTS_PATH}" ]; then mkdir -p ${SSL_CERTS_PATH}; fi \
   && if [ -n "${SSL_CERTS_PATH}" ] && [ -d "${SSL_CERTS_PATH}" ]; then chown ${OS_USERNAME}:${OS_GROUPNAME} ${SSL_CERTS_PATH}; fi \
-  && sync \ 
-  && yum install cronie -y
+  && sync 
 
 
 # Docker entrypoint script:
 # -------------------------
 # Copy docker-entrypoint.sh to configure server.xml configuration file in order to run the service behind a reverse proxy.
 COPY docker-entrypoint.sh /
-
-# Crontab initialisation:
-# -------------------------
-# Cronjob to remove backups older than 30 days, which is run at 1pm every Friday
-RUN echo "0 13 * * 5 jira find $JIRA_BACKUP_PATH -mtime +30 -exec rm {} \;" > /etc/cron.d/crontab
-
-RUN echo '* * * * * jira echo Time and Date is $(date) >> /home/jira/time_and_date_test.txt' >> /etc/cron.d/crontab
-
-# Change of permissions to allow cron to run the job, and then initialisation of the job.
-RUN chmod 0644 /etc/cron.d/crontab 
-RUN crontab /etc/cron.d/crontab 
-RUN crond
 
 #
 #
