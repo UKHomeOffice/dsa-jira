@@ -41,8 +41,8 @@ steps:
     DOCKER_PASSWORD:
       from_secret: docker_password
   when:
-#    branch:
-#    - development
+    branch:
+    - development
     event:
     - push
 
