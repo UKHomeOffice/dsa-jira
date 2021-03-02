@@ -128,6 +128,7 @@ ENV DATACENTER_MODE=false
 ENV JIRA_DATACENTER_SHARE="/mnt/shared"
 
 
+
 # Reverse proxy specific variables:
 # ================================
 
@@ -223,7 +224,7 @@ RUN echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" >/etc/sysconfig/i18
   && sync \
   && if [ -n "${SSL_CERTS_PATH}" ] && [ ! -d "${SSL_CERTS_PATH}" ]; then mkdir -p ${SSL_CERTS_PATH}; fi \
   && if [ -n "${SSL_CERTS_PATH}" ] && [ -d "${SSL_CERTS_PATH}" ]; then chown ${OS_USERNAME}:${OS_GROUPNAME} ${SSL_CERTS_PATH}; fi \
-  && sync
+  && sync 
 
 
 # Docker entrypoint script:
