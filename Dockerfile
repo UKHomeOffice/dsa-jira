@@ -24,7 +24,9 @@ LABEL maintainer="dsainfra"
 # JIRA_VERSION:
 # ------------
 # The value for JIRA_VERSION should be a version number, which is part of the name of the jira software bin/tarball/zip.
-ENV JIRA_VERSION=8.5.5
+
+ENV JIRA_VERSION=8.13.0
+
 
 
 # JIRA_DOWNLOAD_URL:
@@ -128,6 +130,7 @@ ENV DATACENTER_MODE=false
 ENV JIRA_DATACENTER_SHARE="/mnt/shared"
 
 
+
 # Reverse proxy specific variables:
 # ================================
 
@@ -223,7 +226,7 @@ RUN echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" >/etc/sysconfig/i18
   && sync \
   && if [ -n "${SSL_CERTS_PATH}" ] && [ ! -d "${SSL_CERTS_PATH}" ]; then mkdir -p ${SSL_CERTS_PATH}; fi \
   && if [ -n "${SSL_CERTS_PATH}" ] && [ -d "${SSL_CERTS_PATH}" ]; then chown ${OS_USERNAME}:${OS_GROUPNAME} ${SSL_CERTS_PATH}; fi \
-  && sync
+  && sync 
 
 
 # Docker entrypoint script:
