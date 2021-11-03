@@ -16,7 +16,6 @@ steps:
   - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
   - docker build -t quay.io/ukhomeofficedigital/dsa-jira:$${DRONE_COMMIT_SHA} .
   environment:
-#    DOCKER_HOST: tcp://172.17.0.1:2375
     DOCKER_PASSWORD:
       from_secret: docker_password
 
@@ -56,8 +55,8 @@ steps:
     - ${DRONE_COMMIT_SHA}
 
 services:
-  - name: docker
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+- name: docker
+  image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
 trigger:
   branch:
   - development 
@@ -122,8 +121,8 @@ steps:
       from_secret: docker_password
 
 services:
-  - name: docker
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+- name: docker
+  image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
 trigger:
   branch:
   - master 
