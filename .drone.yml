@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: Dev-Jira-Image
+name: Jira-Image
 type: kubernetes
 
 platform:
@@ -8,7 +8,7 @@ platform:
   arch: amd64
 
 steps:
-- name: build_push_to_ecr_dev
+- name: build_push_to_ecr
   image: plugins/ecr
   settings:
     access_key:
@@ -26,50 +26,11 @@ steps:
     - DOCKER_HOST=tcp://172.17.0.1:2375
     tags:
     #  Jira Version Here
-    # - dev-8.13.19-${DRONE_BUILD_NUMBER}
     - 8.13.19
     - ${DRONE_COMMIT_SHA}
 
 trigger:
   branch:
   - development 
-  - version_upgrade
   event:
   - push
-
----  
-kind: pipeline
-name: Prod-Jira-Image
-type: kubernetes
-
-platform:
-  os: linux
-  arch: amd64
-
-steps:
-- name: build_push_to_ecr_prod
-  image: plugins/ecr
-  settings:
-    access_key:
-      from_secret: AWS_ACCESS_KEY_ID
-    secret_key:
-      from_secret: AWS_SECRET_ACCESS_KEY
-    repo: dsa/jira
-    registry: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
-    region: eu-west-2
-    create_repository: false
-    build_args:
-    - APP_BUILD=${DRONE_COMMIT_SHA}
-    # Jira Version Here
-    - JIRA_VERSION=8.13.15
-    - DOCKER_HOST=tcp://172.17.0.1:2375
-    tags:
-    # Jira Version Here
-    - 8.13.15-${DRONE_BUILD_NUMBER}
-    - ${DRONE_COMMIT_SHA}
-
-trigger:
-  branch:
-  - main
-  event:
-  - push  
