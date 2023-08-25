@@ -1,5 +1,5 @@
 # dsa-jira
-This repo houses the Docker Build image for DSA Jira. Any changes made to the Dockerfile are automatically pushed to ECR via a Drone pipeline. The current version of Jira is 8.13.22
+This repo houses the Docker Build image for DSA Jira. Any changes made to the Dockerfile are automatically pushed to ECR via a Drone pipeline. The current version of Jira is 8.13.25
 
 ## Upgrading Jira
 A common use case for this repo is upgrading Jira. This can be achieved by simply amending the Jira version and tag in the .drone.yml file.
