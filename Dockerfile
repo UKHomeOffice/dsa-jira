@@ -26,7 +26,7 @@ LABEL maintainer="dsainfra"
 # The value for JIRA_VERSION should be a version number, which is part of the name of the jira software bin/tarball/zip.
 
 
-# ENV JIRA_VERSION=9.4.27
+# ENV JIRA_VERSION=9.4.28
 ARG JIRA_VERSION
 
 
