@@ -1,28 +1,2 @@
 # dsa-jira
 This repo houses the Docker Build image for DSA Jira. Any changes made to the Dockerfile are automatically pushed to ECR via a Drone pipeline. The current version uploaded to the ECR of Jira is 9.4.30
-
-## Upgrading Jira
-A common use case for this repo is upgrading Jira. This can be achieved by simply amending the Jira version and tag in the .drone.yml file.
-```yaml
-steps:
-- name: build_push_to_ecr
-  image: plugins/ecr
-  settings:
-    access_key:
-      from_secret: AWS_ACCESS_KEY_ID
-    secret_key:
-      from_secret: AWS_SECRET_ACCESS_KEY
-    repo: dsa/jira
-    registry: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
-    region: eu-west-2
-    create_repository: false
-    build_args:
-    - APP_BUILD=${DRONE_COMMIT_SHA}
-    - JIRA_VERSION=9.4.30  # <------------------Jira Version Here
-    - DOCKER_HOST=tcp://172.17.0.1:2375
-    tags:
-    - 9.4.30  # <-------------------------------Jira Version Here
-    - ${DRONE_COMMIT_SHA}
-```
- 
- 
