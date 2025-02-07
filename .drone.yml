@@ -30,7 +30,5 @@ steps:
     - ${DRONE_COMMIT_SHA}
 
 trigger:
-  branch:
-  - development 
   event:
   - push
