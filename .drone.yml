@@ -22,11 +22,11 @@ steps:
     build_args:
     - APP_BUILD=${DRONE_COMMIT_SHA}
     # Jira Version Here
-    - JIRA_VERSION=11.3.8
+    - JIRA_VERSION=10.3.26
     - DOCKER_HOST=tcp://172.17.0.1:2375
     tags:
     #  Jira Version Here
-    - 11.3.8
+    - 10.3.26
     - ${DRONE_COMMIT_SHA}
 
 trigger:
